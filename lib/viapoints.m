@@ -1,0 +1,10 @@
+via1 = [90 143 150 65 148 138 188]; % starting point 
+via9 = [190 184 133 122 244 73 163];% first via point  
+via2 = [150 188 127 155 234 80 160]; % first cube open
+via10 = [150 188 127 155 234 80 205]; % first cube close
+via3 = [100 130 200 33 88 234 207]; % midway via point
+via4 = [102 123 145 30 97 234 207]; % deactivation station
+via5 = [27 146 172 74 113 220 207]; % first disposal
+via6 = [107 130 228 61 105 225 170];% second via point
+via7 = [100 132 248 58 170 223 207];% second cube
+via8 = [72 145 200 46 116 240 203]; % second disposal
