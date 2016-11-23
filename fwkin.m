@@ -23,4 +23,10 @@ A04 = simplify(A04);
 A47 = simplify(A47);
 A07 = A04*A47;
 A07 = subs(A07, [as(2) as(4) as(6) as(7) ds(2) ds(4) ds(6)], [0 0 0 0 0 0 0]);
-A07 = simplify(A07);
+A07 = simplify(A07)
+
+ret = As
+for i=1:7
+    % As is A01,A12,A13....
+    % find A01234567 for everything    (:,:,7)
+end

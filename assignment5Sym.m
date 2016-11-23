@@ -117,5 +117,7 @@ for k = 1:n
         Ctotal = Ctotal + Cpart*qd(j);
     end
     tau(k) = Dpart + Ctotal + g(k);
+    simplify(tau(k))
 end
-simplify(tau(k))
+
+

@@ -3,17 +3,17 @@
 
 %% Discrete goals
 %  Get starting position from Baxter's current position
-states = ones(16,1)*-1000;
-bax_sub = rossubscriber('/robot/joint_states', rostype.sensor_msgs_JointState);
-%  Get updates for all joints
-msg = receive(bax_sub);
-states = joint_states(msg,length(msg.Position),states);
-while (min(states) < -500)
-    % Get another message
-    msg = receive(bax_sub);
-    % Get states from it
-	states = joint_states(msg);
-end
+% states = ones(16,1)*-1000;
+% bax_sub = rossubscriber('/robot/joint_states', rostype.sensor_msgs_JointState);
+% 
+% msg = receive(bax_sub);%  Get updates for all joints
+% states = joint_states(msg,length(msg.Position),states);
+% while (min(states) < -500)
+%     
+%     msg = receive(bax_sub);% Get another message
+%     
+% 	states = joint_states(msg);% Get states from it
+% end
 initial_position = [0 states'];
 
 %% Goals
@@ -25,6 +25,12 @@ first = [5, -0.036432043712278574, -0.0023009711818281204, 0.7531845668517382, -
 second = [10, -0.03681553890924993, 0.41302432713814763, 0.48895637613847565, 0.18676216092504913, -0.6596117387907279, -0.055223308363874894, 0.46479617872928036, 0.7282573790486002, -0.4345000581685434, 0.4736165682596215, -0.18906313210687725, -0.6711165946998685, 0.05560680356084625, 0.438335010138257, -0.768140879533621, -12.565987119160338];
 third = [15, -0.03566505331833587, 0.4341165629715721, 1.7337817855074888, -0.024927187803137973, -0.0222427214243385, -0.23853401251618184, -0.02569417819708068, 2.345456624676798, -0.44677190447162674, 1.7813351899319367, 0.02914563496982286, -0.005368932757598948, 0.24735440204652295, -0.09127185687918211, -2.450150813449977, -12.565987119160338];
 fourth = [20, -0.03604854851530722, 0.5779272618358297, 0.14227671807637213, -0.7727428218972772, -0.27381557063754636, -3.041116911982833, -0.8736020587007431, 2.6403644311477685, -0.6024709544419963, 0.10776215034895031, 0.8275826350641807, -0.27650003701634585, 3.0549227390738016, -0.9533690596707847, -2.58974306514755, -12.565987119160338];
+
+firstArm = [first(1,3), first(1,4), first(1,5), first(1,6), first(1,7), first(1,8), first(1,9)];
+secondArm = [second(1,3), second(1,4), second(1,5), second(1,6), second(1,7), second(1,8), second(1,9)];
+thirdArm = [third(1,3), third(1,4), third(1,5), third(1,6), third(1,7), third(1,8), third(1,9)];
+fourthArm = [fourth(1,3), fourth(1,4), fourth(1,5), fourth(1,6), fourth(1,7), fourth(1,8), fourth(1,9)];
+
 points = [first;second;third;fourth];
 output = [];
 for index = 1:3
@@ -51,5 +57,8 @@ for index = 1:3
         O = a0+a1*t(i)+a2*t(i)^2+a3*t(i)^3+a4*t(i)^4+a5*t(i)^5;
         ret = [ret; O];
     end
-     goals = [goals; ret];
+     goals = [goals; ret]
 end
+
+%% Forward kin
+armGoal = goals(:,3:9)
